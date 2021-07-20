@@ -16,8 +16,7 @@ function Native.Cone.new(...)
     return constructor("ConeHandleAdornment", ...)
 end
 
-function Native.Cylinder.new(...)
-    local props = ({...})[3]
+function Native.Cylinder.new(parent, props)
     local startPoint = props.Start
     local endPoint = props.End
     if typeof(startPoint) == "Vector3" and typeof(endPoint) == "Vector3" then
@@ -28,11 +27,10 @@ function Native.Cylinder.new(...)
         props.End = nil
     end
 
-    return constructor("CylinderHandleAdornment", ...)
+    return constructor("CylinderHandleAdornment", parent, props)
 end
 
-function Native.Line.new(...)
-    local props = ({...})[3]
+function Native.Line.new(parent, props)
     local startPoint = props.Start
     local endPoint = props.End
     if typeof(startPoint) == "Vector3" and typeof(endPoint) == "Vector3" then
@@ -43,7 +41,7 @@ function Native.Line.new(...)
         props.End = nil
     end
 
-    return constructor("LineHandleAdornment", ...)
+    return constructor("LineHandleAdornment", parent, props)
 end
 
 function Native.Sphere.new(...)
