@@ -7,26 +7,10 @@ function Path:__index(i)
 
     if i == "Parent" then
         return container.Parent
-    elseif i == "Adornee" then
-        return props.Adornee
-    elseif i == "AlwaysOnTop" then
-        return props.AlwaysOnTop
-    elseif i == "Radius" then
-        return props.Radius
-    elseif i == "PointRadius" then
-        return props.PointRadius
-    elseif i == "Visible" then
-        return props.Visible
-    elseif i == "Color3" then
-        return props.Color3
-    elseif i == "PointColor3" then
-        return props.PointColor3
-    elseif i == "Transparency" then
-        return props.Transparency
     elseif i == "Points" then
         return {unpack(props.Points)}
     else
-        return Path[i]
+        return Path[i] or props[i]
     end
 end
 function Path:__newindex(i, v)

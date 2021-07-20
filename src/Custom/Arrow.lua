@@ -12,29 +12,8 @@ function Arrow:__index(i)
 
     if i == "Parent" then
         return container.Parent
-    elseif i == "CFrame" then
-        -- Returns the start of the arrow not the center of the arrow
-        return props.CFrame
-    elseif i == "Adornee" then
-        return props.Adornee
-    elseif i == "AlwaysOnTop" then
-        return props.AlwaysOnTop
-    elseif i == "Radius" then
-        return props.Radius
-    elseif i == "InnerRadius" then
-        return props.InnerRadius
-    elseif i == "Height" then
-        return props.Height
-    elseif i == "ConeHeight" then
-        return props.ConeHeight
-    elseif i == "Visible" then
-        return props.Visible
-    elseif i == "Color3" then
-        return props.Color3
-    elseif i == "Transparency" then
-        return props.Transparency
     else
-        return Arrow[i]
+        return Arrow[i] or props[i]
     end
 end
 function Arrow:__newindex(i, v)
