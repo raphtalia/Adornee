@@ -1,0 +1,14 @@
+{
+    "name": "Adornee - Testing",
+    "tree": {
+        "$className": "DataModel",
+
+        "ReplicatedStorage": {
+            "$className": "ReplicatedStorage",
+
+            "Adornee": {
+                "$path": "."
+            }
+        }
+    }
+}
