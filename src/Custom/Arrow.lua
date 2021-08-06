@@ -121,4 +121,8 @@ function Arrow.new(parent, props)
     return setmetatable(arrow, Arrow)
 end
 
+function Arrow:Destroy()
+    self._container.Destroy()
+end
+
 return Arrow

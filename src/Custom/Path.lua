@@ -93,6 +93,10 @@ function Path.new(parent, props)
     return setmetatable(path, Path)
 end
 
+function Path:Destroy()
+    self._container:Destroy()
+end
+
 function Path:_render()
     local container = self._container
     local props = self._props
