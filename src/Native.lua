@@ -8,11 +8,17 @@ local Native = {
     Sphere = {},
 }
 
-function Native.Box.new(...)
-    return constructor("BoxHandleAdornment", ...)
+function Native.Box.new(parent, props)
+    props = props or {}
+    props.Adornee = props.Adornee or parent
+
+    return constructor("BoxHandleAdornment", parent, props)
 end
 
 function Native.Cone.new(parent, props)
+    props = props or {}
+    props.Adornee = props.Adornee or parent
+
     local startPoint = props.Start
     local endPoint = props.End
     if typeof(startPoint) == "Vector3" and typeof(endPoint) == "Vector3" then
@@ -27,6 +33,9 @@ function Native.Cone.new(parent, props)
 end
 
 function Native.Cylinder.new(parent, props)
+    props = props or {}
+    props.Adornee = props.Adornee or parent
+
     local startPoint = props.Start
     local endPoint = props.End
     if typeof(startPoint) == "Vector3" and typeof(endPoint) == "Vector3" then
@@ -41,6 +50,9 @@ function Native.Cylinder.new(parent, props)
 end
 
 function Native.Line.new(parent, props)
+    props = props or {}
+    props.Adornee = props.Adornee or parent
+
     local startPoint = props.Start
     local endPoint = props.End
     if typeof(startPoint) == "Vector3" and typeof(endPoint) == "Vector3" then
@@ -54,8 +66,11 @@ function Native.Line.new(parent, props)
     return constructor("LineHandleAdornment", parent, props)
 end
 
-function Native.Sphere.new(...)
-    return constructor("SphereHandleAdornment", ...)
+function Native.Sphere.new(parent, props)
+    props = props or {}
+    props.Adornee = props.Adornee or parent
+
+    return constructor("SphereHandleAdornment", parent, props)
 end
 
 return Native
