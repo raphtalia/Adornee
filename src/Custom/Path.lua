@@ -19,14 +19,9 @@ function Path:__newindex(i, v)
 
     if i == "Parent" then
         container.Parent = v
-    elseif i == "Adornee" then
+    elseif i == "Adornee" or i == "AlwaysOnTop" or i == "Visible" or i == "Color3" or i == "Transparency" then
         for _,adronment in ipairs(container.Adornees:GetChildren()) do
-            adronment.Adornee = v
-        end
-        props[i] = v
-    elseif i == "AlwaysOnTop" then
-        for _,adronment in ipairs(container.Adornees:GetChildren()) do
-            adronment.AlwaysOnTop = v
+            adronment[i] = v
         end
         props[i] = v
     elseif i == "Radius" then
@@ -42,27 +37,13 @@ function Path:__newindex(i, v)
                 adronment.Radius = v
             end
         end
-    elseif i == "Visible" then
-        for _,adronment in ipairs(container.Adornees:GetChildren()) do
-            adronment.Visible = v
-        end
-        props[i] = v
-    elseif i == "Color3" then
-        for _,adronment in ipairs(container.Adornees:GetChildren()) do
-            adronment.Color3 = v
-        end
     elseif i == "PointColor3" then
         for _,adronment in ipairs(container.Adornees:GetChildren()) do
             if adronment:IsA("SphereHandleAdornment") then
                 adronment.Color3 = v
             end
         end
-    elseif i == "Transparency" then
-        for _,adronment in ipairs(container.Adornees:GetChildren()) do
-            adronment.Transparency = v
-        end
-        props[i] = v
-    elseif i == "Points" then
+    elseif i == "Points" or i == "Closed" then
         props[i] = v
         self:_render()
     end
@@ -70,6 +51,7 @@ end
 
 function Path.new(parent, props)
     props.Points = props.Points or {}
+    props.Closed = props.Closed or false
     props.Adornee = props.Adornee or parent
     props.Radius = props.Radius or 0.1
     props.PointRadius = props.PointRadius or props.Radius
@@ -125,6 +107,27 @@ function Path:_render()
 
         local height = (endPoint - startPoint).Magnitude
 
+        constructor(
+            "CylinderHandleAdornment",
+            container,
+            {
+                CFrame = CFrame.lookAt(startPoint, endPoint) * CFrame.new(0, 0, -height/2),
+                Adornee = props.Adornee,
+                AlwaysOnTop = props.AlwaysOnTop,
+                Radius = props.Radius,
+                Height = height,
+                Visible = props.Visible,
+                Color3 = props.Color3,
+                Transparency = props.Transparency
+            }
+        )
+    end
+
+    if props.Closed then
+        local startPoint = props.Points[1]
+        local endPoint = props.Points[#props.Points]
+
+        local height = (endPoint - startPoint).Magnitude
         constructor(
             "CylinderHandleAdornment",
             container,
